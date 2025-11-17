@@ -11,7 +11,7 @@ int main(int, char**)
 {
     Mat frame;
     cout << "Opening camera..." << endl;
-    VideoCapture capture(0); // open the first camera
+    VideoCapture capture(1); // open the first camera
     if (!capture.isOpened())
     {
         cerr << "ERROR: Can't initialize camera capture" << endl;
