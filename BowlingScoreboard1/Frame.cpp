@@ -50,4 +50,8 @@ public:
 	const vector<int>& getRolls() const {
 		return rolls;
 	}
+	int rollCount() const {
+		return static_cast<int>(rolls.size());
+	}
+
 };

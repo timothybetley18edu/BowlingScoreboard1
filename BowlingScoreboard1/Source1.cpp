@@ -1,4 +1,4 @@
-/*#include <opencv2/core.hpp>
+#include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>  // cv::Canny()
@@ -63,9 +63,9 @@ int main(int, char**)
             imshow("Frame", processed);
         }
         int key = waitKey(1);
-        if (key == 27)
+        if (key == 27/*ESC*/)
             break;
-        if (key == 32)
+        if (key == 32/*SPACE*/)
         {
             enableProcessing = !enableProcessing;
             cout << "Enable frame processing ('space' key): " << enableProcessing << endl;
@@ -73,4 +73,4 @@ int main(int, char**)
     }
     std::cout << "Number of captured frames: " << nFrames << endl;
     return nFrames > 0 ? 0 : 1;
-}*/
+}

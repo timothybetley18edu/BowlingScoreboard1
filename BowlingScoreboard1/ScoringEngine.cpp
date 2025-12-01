@@ -41,6 +41,27 @@ public:
 		}
 		return total;
 	}
+
+	bool isFinish() {
+		for (const auto& frame : frames) {
+			if (!frame.isComplete()) return false;
+		}
+		return true;
+	}
+
+	int currentFrame() const {
+		for (size_t i = 0; i < frames.size(); ++i) {
+			if (!frames[i].isComplete()) {
+				return static_cast<int>(i + 1); // 1-based frame number
+			}
+		}
+		return 10; // if all complete, we’re in the 10th
+	}
+
+	const Frame& getFrame(int index) const {
+		return frames[index];
+	}
+
 private:
 	int strikeBonus(size_t frameIndex) {
 		int bonus = 0;
@@ -59,6 +80,15 @@ private:
 	}
 	int spareBonus(size_t frameIndex) {
 		if (frameIndex + 1 >= frames.size()) return 0;
-		return frames[frameIndex + 1].getRoll(0);
+		const Frame& next = frames[frameIndex + 1];
+		return next.getRoll(0); // works for frames 1–8
+
+		// Special case: if frameIndex == 8 (9th frame), and 10th frame is a spare
+		// then bonus should be the third roll of the 10th frame
+		if (frameIndex == 8 && next.getRolls().size() >= 3) {
+			return next.getRoll(2);
+		}
+		return next.getRoll(0);
+
 	}
 };
