@@ -22,7 +22,7 @@ public:
             double area = cv::contourArea(contour);
             double perimeter = cv::arcLength(contour, true);
             double circularity = 4 * CV_PI * area / (perimeter * perimeter);
-            if (area < minArea || area > 2200.0) continue;
+            if (area < minArea || area > 2500.0) continue;
             if (circularity < 0.4) continue;
             pinCount++;
             cv::Rect box = cv::boundingRect(contour);

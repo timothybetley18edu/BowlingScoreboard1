@@ -16,7 +16,7 @@ int main() {
         return -1;
     }
 
-    PinCounter counter(50, 1500.0); // tuned for black dots on board
+    PinCounter counter(50, 1000.0); // tuned for black dots on board
     cv::Mat frame, output;
 
     int prevRoll = 0;
@@ -42,11 +42,13 @@ int main() {
                 lastRollCount = 0;
             }
 
-            // Reset prevRoll if roll count advanced (e.g. 10th frame extra rolls)
-            if (currentRollCount > lastRollCount) {
-                prevRoll = 0;
-                lastRollCount = currentRollCount;
+            if (frameNum == 10) {
+                if (currentRollCount > lastRollCount) {
+                    prevRoll = 0;
+                    lastRollCount = currentRollCount;
+                }
             }
+
 
             int pinsDown = counter.countPins(frame, output);
             int pinsHitThisRoll = pinsDown - prevRoll;
