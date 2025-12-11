@@ -16,9 +16,8 @@ int main() {
         return -1;
     }
 
-    PinCounter counter(50, 1000.0); // tuned for black dots on board
+    PinCounter counter(80, 1000.0); // tuned for black dots on board
     cv::Mat frame, output;
-
     int prevRoll = 0;
     int lastFrame = game.currentFrame();
     int lastRollCount = 0;
@@ -73,3 +72,29 @@ int main() {
     cv::destroyAllWindows();
     return 0;
 }
+
+// Test PinCounter independently, showing dots on board.
+/*int main() {
+    cv::VideoCapture cap(0);
+    if (!cap.isOpened()) {
+        std::cerr << "Error: Could not open camera." << std::endl;
+        return -1;
+    }
+
+    PinCounter counter(80, 1000.0); // adjust threshold and area as needed
+    cv::Mat frame, output;
+
+    while (true) {
+        cap >> frame;
+        if (frame.empty()) break;
+
+        int dots = counter.countPins(frame, output);
+        cv::imshow("Dot Detection", output);
+
+        if (cv::waitKey(1) == 'q') break;
+    }
+
+    cap.release();
+    cv::destroyAllWindows();
+    return 0;
+}*/
